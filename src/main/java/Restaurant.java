@@ -51,6 +51,16 @@ public class Restaurant {
         menu.remove(itemToBeRemoved);
     }
 
+    public int calculateTotalOrderCost(String... selectedItems) {
+        int totalCost = 0;
+        if(selectedItems.length > 0) {
+            for(String item: selectedItems){
+                totalCost += findItemByName(item).getPrice();
+            }
+        }
+        return totalCost;
+    }
+
     public void displayDetails(){
         System.out.println("Restaurant:"+ name + "\n"
                 +"Location:"+ location + "\n"
