@@ -69,5 +69,34 @@ class RestaurantTest {
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>ORDERS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    @Test
+    public void calculate_total_order_cost_should_return_correct_price_when_one_item_is_added(){
+        //our beforeEach already setup our test resto with 2 items worth 119 and 269 INR respectively for soup and lasagne. Let's test.
+        assertEquals(119, restaurant.calculateTotalOrderCost("Sweet corn soup"));
+    }
+
+    @Test
+    public void calculate_total_order_cost_should_return_correct_total_price_when_multiple_items_are_added() {
+        //Adding one new item brownie to our menu and asserting value of calculateTotalOrderCost
+        restaurant.addToMenu("Sizzling brownie",319);
+        assertEquals(119+319, restaurant.calculateTotalOrderCost("Sweet corn soup", "Sizzling brownie"));
+    }
+
+    @Test
+    public void calculate_total_order_cost_should_return_correct_price_when_item_is_removed() {
+        restaurant.addToMenu("Sizzling brownie",319);
+        assertEquals(319+119,restaurant.calculateTotalOrderCost("Sizzling brownie", "Sweet corn soup"));
+        //Call Assert on CalculateTotalOrderCost once more after removing "Sizzling brownie" argument
+        assertEquals(319, restaurant.calculateTotalOrderCost( "Sizzling brownie"));
+    }
+
+    @Test
+    public void calculate_total_order_cost_should_return_zero_price_when_no_item_is_selected() {
+        assertEquals(0, restaurant.calculateTotalOrderCost());
+    }
+
+//<<<<<<<<<<<<<<<<<<<<<<<ORDERS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 }
